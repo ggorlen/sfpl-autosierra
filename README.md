@@ -1,5 +1,5 @@
 # autosierra
-Tool for personal use to automate batch processing in the Innovative Sierra software program. 
+Tool to automate batch processing in the Innovative Sierra software program. 
 
 Function: Reads a plain text file containing barcodes of items to be processed in Sierra, opens an instance of Sierra or switches to a running Sierra process, navigates through basic Sierra menus, and executes a macro stored in Sierra's CTRL+F12 keystroke for each barcode.
 
