@@ -19,6 +19,10 @@ public class AutoSierra {
             System.exit(0);
         }
 
+         // https://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
+        //final JFileChooser fc = new JFileChooser();
+        //int returnVal = fc.showOpenDialog(aComponent);
+        
         // Read text file from filename and convert to array
         String[] text = readTextFile(args[0]);
 
