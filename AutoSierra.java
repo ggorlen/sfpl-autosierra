@@ -21,7 +21,7 @@ public class AutoSierra {
         String filename = JOptionPane.showInputDialog(null, "Enter input filename with extension \n(Ex: file.txt):", "file.txt");
 
         // Debug:
-        String encoding = JOptionPane.showInputDialog(null, "Enter name of encoding for input \n(Ex: UTF-8):", "sierra.exe");
+        String encoding = JOptionPane.showInputDialog(null, "Enter name of encoding for input \n(Ex: UTF-16):", "UTF-16");
         String process = JOptionPane.showInputDialog(null, "Enter name of process with extension to launch \n(Ex: sierra.exe):", "sierra.exe");
         
         // Display beginning message and offer to abort
