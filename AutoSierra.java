@@ -1,4 +1,4 @@
-// This program only works in Windows.  Tested in Windows 10.
+// This program only works in Windows.  Tested in Windows 10 and 7.
 
 // TODO: add abort option with keylistener
 
@@ -17,11 +17,12 @@ public class AutoSierra {
     
     public static void main(String[] args) throws AWTException,IOException {
 
-        // Debug:
-        String process = JOptionPane.showInputDialog(null, "Enter name of process with extension to launch \n(Ex: sierra.exe):", "sierra.exe");
-
         // Get filename
         String filename = JOptionPane.showInputDialog(null, "Enter input filename with extension \n(Ex: file.txt):", "file.txt");
+
+        // Debug:
+        String encoding = JOptionPane.showInputDialog(null, "Enter name of encoding for input \n(Ex: UTF-8):", "sierra.exe");
+        String process = JOptionPane.showInputDialog(null, "Enter name of process with extension to launch \n(Ex: sierra.exe):", "sierra.exe");
         
         // Display beginning message and offer to abort
         int result = JOptionPane.showConfirmDialog(null, "Beginning batch processing--do not use a mouse or keyboard \n" +
@@ -33,10 +34,10 @@ public class AutoSierra {
         }
         
         // Read text file from filename and convert to String array
-        String[] text = readTextFile(filename);
+        String[] text = readTextFile(filename, encoding);
 
         try {
-            Thread.sleep(5000); //1000 milliseconds is one second.
+            Thread.sleep(2000); //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -45,7 +46,7 @@ public class AutoSierra {
         Runtime.getRuntime().exec(process);      
         
         try {
-            Thread.sleep(5000); //1000 milliseconds is one second.
+            Thread.sleep(15000);   // 1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -53,12 +54,10 @@ public class AutoSierra {
         // Make a robot object
         Robot robot = new Robot();
 
-        // Direct program through a few Sierra login/navigation options
-        for(int i = 0; i < 2; i++) {
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-            robot.delay(5000);
-        }
+        // Direct program through a couple Sierra login/navigation options
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.delay(15000);
         robot.keyPress(KeyEvent.VK_F3);
         robot.keyRelease(KeyEvent.VK_F3);
         robot.delay(5000);
@@ -77,8 +76,10 @@ public class AutoSierra {
             robot.keyPress(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
 
-            robot.delay(1000);
+            robot.delay(3000);
 
             // Execute Sierra Macro at CTRL+F12
             robot.keyPress(KeyEvent.VK_CONTROL);
@@ -86,24 +87,24 @@ public class AutoSierra {
             robot.keyRelease(KeyEvent.VK_F12);
             robot.keyRelease(KeyEvent.VK_CONTROL);
 
-            robot.delay(1000);
+            robot.delay(2000);
         }
         
         // Display end message:
         JOptionPane.showMessageDialog(null, "Done!");
     }
     
-    private static String[] readTextFile(String filename) {
+    private static String[] readTextFile(String filename, String encoding) {
         String input = "";
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-16"))) {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), encoding))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while((line = br.readLine()) != null) {
                 input += line + " ";
             }
         }
-	catch(IOException ex) {
-		System.out.println (ex.toString());
-	}
+		catch(IOException ex) {
+			System.out.println (ex.toString());
+		}
         return input.split(" ");
     }
 }
