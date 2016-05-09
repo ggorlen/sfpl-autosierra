@@ -96,9 +96,9 @@ public class AutoSierra {
                 input += line + " ";
             }
         }
-		catch(IOException ex) {
-			System.out.println (ex.toString());
-		}
+	catch(IOException ex) {
+		System.out.println (ex.toString());
+	}
         return input.split(" ");
     }
 }
