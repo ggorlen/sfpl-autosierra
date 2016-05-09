@@ -1,6 +1,6 @@
-// This program only works in Windows.  Tested in Windows 10 and 7.
+// This program works in Windows running Java 8.  Tested in Windows 10 and 7.
 
-// TODO: add abort option with keylistener
+// TODO: add abort option with keylistener.  Add error log.  Improve user interface.
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +14,8 @@ import java.io.*;
 import javax.swing.JOptionPane; 
 
 public class AutoSierra {
+
+    private static final String ENCODING = "UTF-8";
     
     public static void main(String[] args) throws AWTException,IOException {
 
@@ -21,12 +23,12 @@ public class AutoSierra {
         String filename = JOptionPane.showInputDialog(null, "Enter input filename with extension \n(Ex: file.txt):", "file.txt");
 
         // Debug:
-        String encoding = JOptionPane.showInputDialog(null, "Enter name of encoding for input \n(Ex: UTF-16):", "UTF-16");
-        String process = JOptionPane.showInputDialog(null, "Enter name of process with extension to launch \n(Ex: sierra.exe):", "sierra.exe");
+        // String encoding = JOptionPane.showInputDialog(null, "Enter name of encoding for input \n(Ex: UTF-16):", "UTF-16");
+        // String process = JOptionPane.showInputDialog(null, "Enter name of process with extension to launch \n(Ex: sierra.exe):", "sierra.exe");
         
         // Display beginning message and offer to abort
-        int result = JOptionPane.showConfirmDialog(null, "Beginning batch processing--do not use a mouse or keyboard \n" +
-                                                                     "until the completion dialog box appears.",
+        int result = JOptionPane.showConfirmDialog(null, "Beginning batch processing; switch the active window to Sierra in the next 10 seconds, \n" +
+                                                        "then do not use the mouse or keyboard until the completion dialog box appears.",
         "Alert", JOptionPane.OK_CANCEL_OPTION);
         
         if (result != 0) {
@@ -34,17 +36,12 @@ public class AutoSierra {
         }
         
         // Read text file from filename and convert to String array
-        String[] text = readTextFile(filename, encoding);
+        String[] text = readTextFile(filename);
+        
+        // Launch Sierra as active window.  Problem: can't launch Sierra as easily as notepad?
+        // Runtime.getRuntime().exec(process);
 
-        try {
-            Thread.sleep(2000); //1000 milliseconds is one second.
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-        
-        // Launch Sierra as active window
-        Runtime.getRuntime().exec(process);      
-        
+        // Give user time to begin Sierra as active process
         try {
             Thread.sleep(15000);   // 1000 milliseconds is one second.
         } catch(InterruptedException ex) {
@@ -54,10 +51,7 @@ public class AutoSierra {
         // Make a robot object
         Robot robot = new Robot();
 
-        // Direct program through a couple Sierra login/navigation options
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-        robot.delay(15000);
+        // Direct program to Sierra's "Search / Holds" screen
         robot.keyPress(KeyEvent.VK_F3);
         robot.keyRelease(KeyEvent.VK_F3);
         robot.delay(5000);
@@ -94,9 +88,9 @@ public class AutoSierra {
         JOptionPane.showMessageDialog(null, "Done!");
     }
     
-    private static String[] readTextFile(String filename, String encoding) {
+    private static String[] readTextFile(String filename) {
         String input = "";
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), encoding))) {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), ENCODING))) {
             String line;
             while((line = br.readLine()) != null) {
                 input += line + " ";
