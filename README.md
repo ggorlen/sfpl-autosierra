@@ -6,5 +6,7 @@ Function: Reads a plain text file containing barcodes of items to be processed i
 Issues: Due to the nature of the program's simulation of human keystrokes, the program currently cannot detect input errors or feedback from Sierra.  This program is therefore suitable for personal applications.
 
 Todos: 
-- Add abort feature using keylistener.
-- Add exceptions for invalid barcode length and "31223" prefix (ex: 31223017531260)
+- Add abort feature using https://github.com/kwhat/jnativehook
+- Consider adding additional macro choices in drop-down list; but this would make execution less streamlined
+- [done] Add exceptions for invalid barcode length and "31223" prefix (ex: 31223017531260)
+- [done] Add longer keystroke delays for magazines
