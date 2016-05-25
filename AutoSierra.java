@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class AutoSierra {
 
-    private static final String ENCODING = "UTF-16";
+    private static final String ENCODING = "UTF-8";
     private static final String[] ITEM_TYPES = {"books", "magazines"};
     private static final String BARCODE_PREFIX = "31223";
     private static final int BARCODE_LENGTH = 13;
