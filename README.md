@@ -11,3 +11,4 @@ Todos:
 - Consider creating a UI
 - [done] Add exceptions for invalid barcode length and "31223" prefix (ex: 31223017531260).  Replaces error log.
 - [done] Add longer keystroke delays for magazines
+- [done] Add elapsed time
