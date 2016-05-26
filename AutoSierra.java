@@ -13,15 +13,15 @@ import javax.swing.JOptionPane;
 
 public class AutoSierra {
 
-    private static final String ENCODING = "UTF-8";
-    private static final String[] ITEM_TYPES = {"books", "magazines"};
+    private static final String ENCODING = "UTF-16";
+    private static final String[] ITEM_TYPES = { "Non-magazine items", "Magazines" };
     private static final String BARCODE_PREFIX = "31223";
-    private static final int BARCODE_LENGTH = 13;
-    private static final int BOOK_DELAY = 3500;
-    private static final int MAGAZINE_DELAY = 15000;
+    private static final int BARCODE_LENGTH = 14;
+    private static final int BOOK_DELAY = 3300;
+    private static final int MAGAZINE_DELAY = 13000;
     
     
-    public static void main(String[] args) throws AWTException,IOException {
+    public static void main(String[] args) throws AWTException, IOException {
 
         // Get filename
         String filename = JOptionPane.showInputDialog(null, "Enter input filename with extension \n(Ex: file.txt):", "file.txt");
@@ -71,8 +71,8 @@ public class AutoSierra {
         // Begin timing the batch
         long startTime = System.nanoTime();
         
-        // Launch Sierra as active window.  Problem: can't launch Sierra as easily as notepad.
-        Runtime.getRuntime().exec("notepad.exe");
+        // Debug: Launch Sierra as active window.  Problem: can't launch Sierra as easily as notepad.
+        // Runtime.getRuntime().exec("notepad.exe");
 
         // Give user time to begin Sierra as active process
         try {
@@ -92,10 +92,10 @@ public class AutoSierra {
         // Select the barcode search choice from Sierra's drop-down menu in "Search / Holds"
         robot.keyPress(KeyEvent.VK_B);
         robot.keyRelease(KeyEvent.VK_B);
-        robot.delay(500);
+        robot.delay(1500);
         
         // Enter text into window
-        for(int i = 0; i < text.length; i++) {
+        for (int i = 0; i < text.length; i++) {
             
             // Copy each barcode into Sierra using Windows clipboard
             StringSelection stringSelection = new StringSelection(text[i]);
@@ -109,7 +109,7 @@ public class AutoSierra {
             robot.keyRelease(KeyEvent.VK_ENTER);
 
             // Adjust robot delay according to item type
-            if (type == "books") {
+            if (type == "Non-magazine items") {
                 robot.delay(BOOK_DELAY);
             }
             else {        // type == "magazines"
@@ -123,30 +123,30 @@ public class AutoSierra {
             robot.keyRelease(KeyEvent.VK_CONTROL);
 
             // Adjust robot delay according to item type
-            if (type == "books") {
+            if (type == "Non-magazine items") {
                 robot.delay(BOOK_DELAY - 1000);
             }
-            else {        // type == "magazines"
-                robot.delay(MAGAZINE_DELAY - 1000);
+            else {        // type == "Magazines"
+                robot.delay(MAGAZINE_DELAY / 2);
             }
         }
         
         // Display end message:
         JOptionPane.showMessageDialog(null, "Processing complete!\n" + 
-            "The elapsed time for this batch process was " + ((double)(System.nanoTime() - startTime)) / 1000000000 + " seconds.");
+            "The elapsed time for this batch was " + (int)((((double)(System.nanoTime() - startTime)) / 1000000000) / 60) + " minute(s).");
     }
     
     private static String[] readTextFile(String filename) {
         String input = "";
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), ENCODING))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), ENCODING))) {
             String line;
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 input += line + " ";
             }
         }
-	catch(IOException ex) {
-		System.out.println (ex.toString());
-	}
+        catch (IOException ex) {
+            System.out.println(ex.toString());
+        }
         return input.split(" ");
     }
 }
