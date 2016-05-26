@@ -55,7 +55,6 @@ public class AutoSierra {
                 JOptionPane.showMessageDialog(null, "The following barcode contains a non-digit character; fix it and try again:\n" + text[i],
                 "Alert", JOptionPane.WARNING_MESSAGE);
                 System.exit(0);
-                
             }
         }
         
@@ -77,7 +76,7 @@ public class AutoSierra {
         // Give user time to begin Sierra as active process
         try {
             Thread.sleep(15000);   // 1000 milliseconds is one second.
-        } catch(InterruptedException ex) {
+        } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
         
@@ -94,7 +93,7 @@ public class AutoSierra {
         robot.keyRelease(KeyEvent.VK_B);
         robot.delay(1500);
         
-        // Enter text into window
+        // Process each item
         for (int i = 0; i < text.length; i++) {
             
             // Copy each barcode into Sierra using Windows clipboard
@@ -112,11 +111,11 @@ public class AutoSierra {
             if (type == "Non-magazine items") {
                 robot.delay(BOOK_DELAY);
             }
-            else {        // type == "magazines"
+            else {        // type == "Magazines"
                 robot.delay(MAGAZINE_DELAY);
             }
             
-            // Execute Sierra Macro at CTRL+F12
+            // Execute Sierra macro at CTRL+F12
             robot.keyPress(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_F12);
             robot.keyRelease(KeyEvent.VK_F12);
