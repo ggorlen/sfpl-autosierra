@@ -142,8 +142,7 @@ public class AutoSierra {
             while ((line = br.readLine()) != null) {
                 input += line + " ";
             }
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println(ex.toString());
         }
         return input.split(" ");
