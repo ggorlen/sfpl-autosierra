@@ -38,7 +38,7 @@ public class AutoSierra {
         // Read text file from filename and convert to String array
         String[] text = readTextFile(filename);
         
-        // Verify file contents; if any barcodes aren't 13 digits, don't start with the correct prefix, or contain a non-digit character, abort.
+        // Verify file contents; if any barcodes aren't the correct length, don't start with the correct prefix, or contain a non-digit character, abort.
         for (int i = 0; i < text.length; i++) {
             if (text[i].length() != BARCODE_LENGTH) {
                 JOptionPane.showMessageDialog(null, "The following barcode is the wrong length; fix it and try again:\n" + text[i],
