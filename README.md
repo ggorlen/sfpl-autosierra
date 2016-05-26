@@ -7,8 +7,10 @@ Issues: Due to the nature of the program's simulation of human keystrokes, the p
 
 Todos: 
 - Add abort feature using https://github.com/kwhat/jnativehook
-- Consider adding additional macro choices in drop-down list; but this would make execution less streamlined
-- Consider creating a UI
+- Consider adding additional macro choices in drop-down list; but this would require a form or streamlining would be sacrificed
+- Allow user to select encoding, also requiring a form or more buttons
+- Consider creating a UI using Swing, SpringForm or similar
 - [done] Add exceptions for invalid barcode length and "31223" prefix (ex: 31223017531260).  Replaces error log.
 - [done] Add longer keystroke delays for magazines
 - [done] Add elapsed time
+- [done] Improved navigation in basic Sierra windows
