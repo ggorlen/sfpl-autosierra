@@ -12,6 +12,7 @@ Todos:
 - Consider adding additional macro choices in drop-down list; but this would require a form or streamlining would be sacrificed
 - Consider allowing user to select encoding, also requiring a form or more buttons, or implement using command line arguments
 - Consider creating a UI using Swing, SpringForm or similar
+- Consider adding reports/counter/log for number of items withdrawn each month
 - Consider Java 7 version
 - [done] Add exceptions for invalid barcode length and "31223" prefix (ex: 31223017531260).  Replaces error log.
 - [done] Add longer keystroke delays for magazines
