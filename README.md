@@ -7,6 +7,7 @@ Issues: Due to the nature of the program's simulation of human keystrokes, the p
 
 Todos: 
 - Add abort feature using https://github.com/kwhat/jnativehook
+- Add estimated running time to confirmation dialog before processing a batch
 - Add exception for empty or invalid input file
 - Consider using Sierra's API: https://developer.iii.com/
 - Consider adding additional macro choices in drop-down list; but this would require a form or streamlining would be sacrificed
